@@ -15,8 +15,8 @@ export class PaddleDirective {
   @Output() onCheckoutEvent: EventEmitter<
     PaddleEventCallbackData
   > = new EventEmitter();
-  @Input() vendor: number;
-  @Input() product: number;
+  @Input() vendor?: number;
+  @Input() product?: number;
   @Input() title?: string;
   @Input() message?: string;
   @Input() coupon?: string;
@@ -25,6 +25,11 @@ export class PaddleDirective {
   constructor(private paddleServ: PaddleService) {}
 
   async ngOnInit() {
+
+    if (this.vendor == null) {
+      throw new Error(`'vendor has to be set!'`);
+    }
+    
     await this.paddleServ.create({
       vendor: this.vendor,
       eventCallback: (data: PaddleEventCallbackData) => {
@@ -33,8 +38,8 @@ export class PaddleDirective {
     });
   }
 
-  @HostListener('click', ['$event'])
-  onClick($event) {
+  @HostListener('click')
+  onClick() {
     this.paddleServ.open({
       product: this.product,
       title: this.title,

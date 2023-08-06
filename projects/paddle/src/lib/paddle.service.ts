@@ -17,7 +17,7 @@ declare let Paddle: any;
   providedIn: 'root',
 })
 export class PaddleService {
-  private loaded: Promise<void>;
+  private loaded?: Promise<void>;
   private sandbox: boolean;
 
   constructor(@Optional() config?: PaddleServiceConfig) {

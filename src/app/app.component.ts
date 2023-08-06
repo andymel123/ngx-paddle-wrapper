@@ -13,7 +13,7 @@ import {
 })
 export class AppComponent implements OnInit {
   title = 'ngx-paddle-wrapper';
-  price: PaddleProductPrice;
+  price?: PaddleProductPrice;
   // TYPE YOUR OWN IDs BELOW:
   vendorId = 123456;
   productId = 654321;
